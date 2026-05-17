@@ -25,11 +25,11 @@ function HeroSection({ onNavigate }) {
             your phone, get a WhatsApp reminder before you go.
           </p>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <CTA size="lg" variant="primary" onClick={() => onNavigate('find')}>
-              Book a session
+            <CTA size="lg" variant="primary" onClick={() => onNavigate('coming')}>
+              Join the waitlist
             </CTA>
-            <CTA size="lg" variant="ghost" icon={null} onClick={() => onNavigate('how')}>
-              How it works
+            <CTA size="lg" variant="ghost" icon={null} onClick={() => onNavigate('contact')}>
+              Contact us
             </CTA>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginLeft: 6,
               fontSize: 13, color: SITE.muted, fontFamily: sansFF }}>
@@ -236,7 +236,7 @@ function ServicesSection({ onNavigate }) {
               No more emailing three different offices. Pick a service, find someone with open slots, book it.
             </p>
           </div>
-          <a onClick={() => onNavigate('find')} style={{
+          <a onClick={() => onNavigate('coming')} style={{
             fontFamily: sansFF, fontSize: 13.5, color: SITE.ink,
             display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer',
             textDecoration: 'underline', textUnderlineOffset: 4, textDecorationColor: SITE.muted2,
@@ -290,8 +290,8 @@ function ServicesSection({ onNavigate }) {
                   </div>
                 ))}
               </div>
-              <CTA size="md" variant="ghost" style={{ marginTop: 20 }} onClick={() => onNavigate('find')}>
-                Find a {s.key === 'tutoring' ? 'tutor' : s.key === 'writing' ? 'consultant' : 'advisor'}
+              <CTA size="md" variant="ghost" style={{ marginTop: 20 }} onClick={() => onNavigate('coming')}>
+                Coming soon
               </CTA>
             </article>
           ))}
@@ -548,9 +548,9 @@ function FinalCTA({ onNavigate }) {
             no email tag. Use it from your phone — it works.
           </p>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <CTA size="lg" variant="primary" onClick={() => onNavigate('find')}>Book a session</CTA>
-            <CTA size="lg" variant="paper" icon={null} onClick={() => onNavigate('coming')}>
-              Join the launch waitlist
+            <CTA size="lg" variant="primary" onClick={() => onNavigate('coming')}>Join the waitlist</CTA>
+            <CTA size="lg" variant="paper" icon={null} onClick={() => onNavigate('contact')}>
+              Contact us
             </CTA>
           </div>
         </div>

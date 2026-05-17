@@ -167,8 +167,6 @@ function AnnouncementBar({ onComingSoon }) {
 function SiteNav({ currentPage, onNavigate }) {
   const items = [
     { id: 'home', label: 'Home' },
-    { id: 'find', label: 'Find a tutor' },
-    { id: 'how', label: 'How it works' },
     { id: 'coming', label: 'Coming soon' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -200,14 +198,8 @@ function SiteNav({ currentPage, onNavigate }) {
           })}
         </nav>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <a style={{
-            fontFamily: sansFF, fontSize: 13, color: SITE.ink2, cursor: 'pointer', textDecoration: 'none',
-            display: 'flex', alignItems: 'center', gap: 6,
-          }}>
-            <SIcon name="user" size={14} /> Sign in
-          </a>
           <CTA size="sm" variant="dark" icon="arrowRight"
-            onClick={() => onNavigate('find')}>Book a session</CTA>
+            onClick={() => onNavigate('coming')}>Join the waitlist</CTA>
         </div>
       </div>
     </header>
@@ -216,10 +208,10 @@ function SiteNav({ currentPage, onNavigate }) {
 
 function SiteFooter({ onNavigate }) {
   const cols = [
-    { title: 'Services', items: ['Writing Centre', 'Peer Tutoring', 'Academic Advising', 'Workshops & Drop-ins'] },
-    { title: 'Students', items: ['Find a tutor', 'Book a session', 'Cancel or reschedule', 'Become a tutor'] },
-    { title: 'About WASH', items: ['How it works', 'Our consultants', 'Newsroom', 'Annual report (2025)'] },
-    { title: 'Help', items: ['FAQs', 'Contact us', 'Accessibility', 'Report a problem'] },
+    { title: 'Services', items: ['Writing Centre', 'Peer Tutoring', 'Academic Advising'] },
+    { title: 'Coming soon', items: ['Join the waitlist', 'Launching Sep 2026'] },
+    { title: 'About WASH', items: ['How it works', 'Our consultants', 'Annual report (2025)'] },
+    { title: 'Help', items: ['FAQs', 'Contact us', 'Accessibility'] },
   ];
   return (
     <footer style={{ background: SITE.primaryInk, color: '#fff', padding: '64px 32px 28px' }}>

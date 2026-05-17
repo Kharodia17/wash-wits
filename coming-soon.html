@@ -34,28 +34,26 @@
 <script type="text/babel" src="page-home.jsx"></script>
 <script type="text/babel" src="page-contact.jsx"></script>
 <script type="text/babel" src="page-coming-soon.jsx"></script>
-<script type="text/babel" src="page-find.jsx"></script>
 
 <script type="text/babel">
-/* global React, ReactDOM, HomePage, ContactPage, ComingSoonPage, FindPage, SITE */
+/* global React, ReactDOM, HomePage, ContactPage, ComingSoonPage, SITE */
 
 function Site() {
   const [page, setPage] = React.useState('coming');
   const ref = React.useRef(null);
 
   const onNavigate = (p) => {
-    setPage(p === 'how' ? 'home' : p);
+    setPage(p === 'how' || p === 'find' ? 'home' : p);
     if (ref.current) ref.current.scrollTop = 0;
     const titles = {
       home: 'WASH · Wits Academic Support Hub',
-      find: 'Find a Tutor · WASH',
       contact: 'Contact Us · WASH',
       coming: 'Coming Soon · WASH',
     };
     document.title = titles[p] || titles.home;
   };
 
-  const Pages = { home: HomePage, find: FindPage, contact: ContactPage, coming: ComingSoonPage };
+  const Pages = { home: HomePage, contact: ContactPage, coming: ComingSoonPage };
   const Cur = Pages[page] || HomePage;
 
   return (
