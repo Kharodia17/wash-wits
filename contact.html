@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us · WASH</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="tokens.css" />
+
+  <style>
+    html, body { margin: 0; padding: 0; background: #F4EFE6; min-height: 100vh; }
+    body { font-family: 'Geist', system-ui, -apple-system, sans-serif; color: #1a1a1a; }
+    #root { min-height: 100vh; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+    input { outline: none; }
+    * { box-sizing: border-box; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="site-shell.jsx"></script>
+<script type="text/babel" src="page-home.jsx"></script>
+<script type="text/babel" src="page-contact.jsx"></script>
+<script type="text/babel" src="page-coming-soon.jsx"></script>
+<script type="text/babel" src="page-find.jsx"></script>
+
+<script type="text/babel">
+/* global React, ReactDOM, HomePage, ContactPage, ComingSoonPage, FindPage, SITE */
+
+function Site() {
+  const [page, setPage] = React.useState('contact');
+  const ref = React.useRef(null);
+
+  const onNavigate = (p) => {
+    setPage(p === 'how' ? 'home' : p);
+    if (ref.current) ref.current.scrollTop = 0;
+    const titles = {
+      home: 'WASH · Wits Academic Support Hub',
+      find: 'Find a Tutor · WASH',
+      contact: 'Contact Us · WASH',
+      coming: 'Coming Soon · WASH',
+    };
+    document.title = titles[p] || titles.home;
+  };
+
+  const Pages = { home: HomePage, find: FindPage, contact: ContactPage, coming: ComingSoonPage };
+  const Cur = Pages[page] || HomePage;
+
+  return (
+    <div ref={ref} style={{ minHeight: '100vh', background: SITE.bg }}>
+      <Cur onNavigate={onNavigate} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Site />);
+</script>
+</body>
+</html>

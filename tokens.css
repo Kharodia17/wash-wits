@@ -1,0 +1,98 @@
+/* WASH dashboard — design tokens */
+:root {
+  /* surfaces */
+  --bg: #F4EFE6;
+  --surface: #FFFFFF;
+  --surface-2: #FAF6ED;
+  --surface-3: #EFE9DC;
+
+  /* ink */
+  --ink: #1A1A1A;
+  --ink-2: #2D2D2D;
+  --muted: #6F6A5F;
+  --muted-2: #A29D90;
+  --line: rgba(20,20,10,0.09);
+  --line-strong: rgba(20,20,10,0.16);
+
+  /* brand */
+  --primary: #114E48;        /* deep teal */
+  --primary-ink: #0B2F2C;
+  --primary-soft: #DDE9E5;
+  --primary-tint: #EDF3F0;
+
+  --accent: #D8593A;         /* warm coral, CTA */
+  --accent-ink: #7E3221;
+  --accent-soft: #F8DDD2;
+
+  /* service hues */
+  --writing: #4E709A;
+  --writing-soft: #E3EAF2;
+  --tutoring: #6E8C46;
+  --tutoring-soft: #E8EEDB;
+  --advising: #A87633;
+  --advising-soft: #F2E5CC;
+
+  /* status */
+  --warn: #B5642A;
+  --good: #4E7A4E;
+
+  /* radius / shadow */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --shadow-1: 0 1px 0 rgba(20,20,10,0.04), 0 8px 24px -16px rgba(20,20,10,0.18);
+}
+
+* { box-sizing: border-box; }
+
+.wash {
+  font-family: 'Geist', -apple-system, system-ui, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11';
+}
+.wash-display {
+  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+  padding: 4px 9px; border-radius: 999px; text-transform: uppercase;
+}
+.chip-dot {
+  width: 6px; height: 6px; border-radius: 999px; flex-shrink: 0;
+}
+
+.chip.writing  { background: var(--writing-soft);  color: #2F4866; }
+.chip.tutoring { background: var(--tutoring-soft); color: #3D5223; }
+.chip.advising { background: var(--advising-soft); color: #6E4912; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-weight: 500; font-size: 14px;
+  border: 0; cursor: pointer; border-radius: 999px;
+  padding: 12px 18px; line-height: 1; transition: transform .06s ease, background .15s ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #C24E32; }
+.btn-ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--line-strong); }
+.btn-ghost:hover { background: rgba(0,0,0,0.03); }
+.btn-dark { background: var(--primary); color: #fff; }
+.btn-dark:hover { background: var(--primary-ink); }
+
+.card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+}
+
+.divider { height: 1px; background: var(--line); }
+
+/* scrollbars in mobile screen */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
