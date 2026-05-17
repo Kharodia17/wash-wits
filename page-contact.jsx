@@ -407,10 +407,10 @@ function FAQ() {
   const [open, setOpen] = React.useState(0);
   const items = [
     { q: 'Is WASH really free?', a: 'Yes. Funded by Wits and the student fee. There is no cap on sessions per semester.' },
-    { q: 'I missed my session. Can I still rebook?', a: 'Yes — after two no-shows in a semester you'll be asked to confirm 1 hour ahead, but nothing blocks rebooking.' },
-    { q: 'Are sessions confidential?', a: 'Yes. Advisors and consultants don't share notes with your lecturers or appear on your transcript.' },
+    { q: 'I missed my session. Can I still rebook?', a: "Yes — after two no-shows in a semester you'll be asked to confirm 1 hour ahead, but nothing blocks rebooking." },
+    { q: 'Are sessions confidential?', a: "Yes. Advisors and consultants don't share notes with your lecturers or appear on your transcript." },
     { q: 'Can postgrad students use peer tutoring?', a: 'Peer tutoring covers 1st and 2nd-year subjects. Postgrads should book Writing or Advising sessions instead.' },
-    { q: 'Will my tutor have my draft beforehand?', a: 'If you upload it during booking, yes. They'll get it 24h before the session.' },
+    { q: 'Will my tutor have my draft beforehand?', a: "If you upload it during booking, yes. They'll get it 24h before the session." },
   ];
   return (
     <section style={{ background: SITE.paper, padding: '88px 32px', borderTop: `1px solid ${SITE.line}` }}>
