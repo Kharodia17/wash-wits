@@ -1,13 +1,14 @@
-/* global React, SITE, sansFF, dispFF, SIcon, Wordmark, PillBadge, CTA, AnnouncementBar, SiteNav, SiteFooter */
+/* global React, SITE, sansFF, dispFF, SIcon, Wordmark, PillBadge, CTA, AnnouncementBar, SiteNav, SiteFooter, useIsMobile */
 // WASH WordPress site — Contact page
 
 function ContactHero() {
+  const m = useIsMobile();
   return (
-    <section style={{ background: SITE.bg, padding: '64px 32px 28px' }}>
+    <section style={{ background: SITE.bg, padding: m ? '40px 20px 20px' : '64px 32px 28px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <PillBadge tone="primary">Contact us</PillBadge>
         <h1 style={{
-          fontFamily: dispFF, fontWeight: 400, fontSize: 64, lineHeight: 1.05,
+          fontFamily: dispFF, fontWeight: 400, fontSize: m ? 38 : 64, lineHeight: 1.05,
           letterSpacing: '-0.02em', color: SITE.ink, margin: '14px 0 14px', maxWidth: 880,
         }}>
           Got a question we couldn't answer online? <span style={{ fontStyle: 'italic', color: SITE.primary }}>Let's talk.</span>
@@ -23,6 +24,7 @@ function ContactHero() {
 }
 
 function ChannelStrip() {
+  const m = useIsMobile();
   const channels = [
     { icon: 'whatsapp', l: 'WhatsApp', v: '+27 11 717 0000', sub: 'Mon–Fri · 8:00–17:00', tone: SITE.tutoring, soft: SITE.tutoringSoft },
     { icon: 'mail',     l: 'Email',    v: 'wash@wits.ac.za', sub: 'Reply within 1 working day', tone: SITE.writing, soft: SITE.writingSoft },
@@ -30,9 +32,9 @@ function ChannelStrip() {
     { icon: 'pin',      l: 'Walk in', v: '1st Floor, Solomon Mahlangu House', sub: 'East Campus · Braamfontein', tone: SITE.advising, soft: SITE.advisingSoft },
   ];
   return (
-    <section style={{ background: SITE.bg, padding: '8px 32px 48px' }}>
+    <section style={{ background: SITE.bg, padding: m ? '8px 20px 40px' : '8px 32px 48px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: m ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 14 }}>
           {channels.map((c, i) => (
             <a key={i} style={{
               display: 'flex', flexDirection: 'column', gap: 14,
@@ -63,6 +65,7 @@ function ChannelStrip() {
 
 // ── Interactive contact form ──────────────────────────────────
 function ContactMain() {
+  const m = useIsMobile();
   const topics = ['A booking issue', 'Feedback on a session', 'Accessibility request', 'Partnership / staff', 'Something else'];
   const [topic, setTopic]       = React.useState(0);
   const [name, setName]         = React.useState('');
@@ -96,14 +99,17 @@ function ContactMain() {
     setSubmitted(true);
   };
 
+  const sectionPad = m ? '20px 20px 72px' : '20px 32px 88px';
+  const gridCols   = m ? '1fr' : '1.35fr 1fr';
+
   if (submitted) {
     return (
-      <section style={{ background: SITE.bg, padding: '20px 32px 88px' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: 28 }}>
+      <section style={{ background: SITE.bg, padding: sectionPad }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: gridCols, gap: 28 }}>
           <div style={{
-            background: SITE.surface, borderRadius: 24, padding: 56, border: `1px solid ${SITE.line}`,
+            background: SITE.surface, borderRadius: 24, padding: m ? 32 : 56, border: `1px solid ${SITE.line}`,
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
-            minHeight: 420,
+            minHeight: 320,
           }}>
             <div style={{
               width: 64, height: 64, borderRadius: '50%', background: SITE.primaryTint, color: SITE.primary,
@@ -130,9 +136,9 @@ function ContactMain() {
   }
 
   return (
-    <section style={{ background: SITE.bg, padding: '20px 32px 88px' }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: 28 }}>
-        <form onSubmit={handleSubmit} noValidate style={{ background: SITE.surface, borderRadius: 24, padding: 36, border: `1px solid ${SITE.line}` }}>
+    <section style={{ background: SITE.bg, padding: sectionPad }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: gridCols, gap: 28 }}>
+        <form onSubmit={handleSubmit} noValidate style={{ background: SITE.surface, borderRadius: 24, padding: m ? 24 : 36, border: `1px solid ${SITE.line}` }}>
           <div style={{ fontFamily: dispFF, fontSize: 28, color: SITE.ink, marginBottom: 4 }}>Send us a message</div>
           <div style={{ fontSize: 13.5, color: SITE.muted, marginBottom: 24 }}>
             Replies come from a real person, usually within one working day.
@@ -156,7 +162,7 @@ function ContactMain() {
           </FormField>
 
           {/* Name + student number */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: m ? '1fr' : '1fr 1fr', gap: 16 }}>
             <FormField label="Your name" required error={errors.name}>
               <input
                 style={inputStyle(errors.name)}
@@ -211,7 +217,7 @@ function ContactMain() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: m ? 'flex-start' : 'center', flexDirection: m ? 'column' : 'row', gap: m ? 16 : 0, justifyContent: 'space-between' }}>
             <label onClick={() => setCopyMe(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: SITE.ink2, cursor: 'pointer', userSelect: 'none' }}>
               <span style={{
                 width: 16, height: 16, borderRadius: 4, flexShrink: 0,
@@ -230,6 +236,7 @@ function ContactMain() {
               padding: '16px 26px', borderRadius: 999, cursor: 'pointer',
               background: SITE.primary, color: '#fff', border: 'none',
               transition: 'background .15s, transform .06s',
+              width: m ? '100%' : 'auto', justifyContent: m ? 'center' : 'flex-start',
             }}
             onMouseEnter={e => e.currentTarget.style.background = SITE.primaryInk}
             onMouseLeave={e => e.currentTarget.style.background = SITE.primary}
@@ -273,7 +280,7 @@ function LocationCard() {
           1st Floor · East Campus<br/>
           University of the Witwatersrand · Braamfontein, 2050
         </div>
-        <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+        <div style={{ display: 'flex', gap: 10, marginTop: 16, flexWrap: 'wrap' }}>
           <CTA size="sm" variant="ghost" icon="arrowUpRight" as="a" href="https://maps.google.com/?q=Solomon+Mahlangu+House+Wits+University" target="_blank">Open in Maps</CTA>
           <CTA size="sm" variant="ghost" icon={null}>Campus shuttle stops</CTA>
         </div>
@@ -404,6 +411,7 @@ function AccessibilityCard() {
 
 // ── Interactive FAQ accordion ─────────────────────────────────
 function FAQ() {
+  const m = useIsMobile();
   const [open, setOpen] = React.useState(0);
   const items = [
     { q: 'Is WASH really free?', a: 'Yes. Funded by Wits and the student fee. There is no cap on sessions per semester.' },
@@ -413,11 +421,11 @@ function FAQ() {
     { q: 'Will my tutor have my draft beforehand?', a: "If you upload it during booking, yes. They'll get it 24h before the session." },
   ];
   return (
-    <section style={{ background: SITE.paper, padding: '88px 32px', borderTop: `1px solid ${SITE.line}` }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 64 }}>
+    <section style={{ background: SITE.paper, padding: m ? '56px 20px' : '88px 32px', borderTop: `1px solid ${SITE.line}` }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: m ? '1fr' : '1fr 1.4fr', gap: m ? 32 : 64 }}>
         <div>
           <PillBadge tone="primary">Common questions</PillBadge>
-          <h2 style={{ fontFamily: dispFF, fontWeight: 400, fontSize: 40, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '14px 0 12px' }}>
+          <h2 style={{ fontFamily: dispFF, fontWeight: 400, fontSize: m ? 28 : 40, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '14px 0 12px' }}>
             Before you reach out, <span style={{ fontStyle: 'italic', color: SITE.primary }}>have a look here.</span>
           </h2>
           <p style={{ fontSize: 14.5, color: SITE.muted, lineHeight: 1.6, margin: 0 }}>
@@ -434,7 +442,7 @@ function FAQ() {
                   style={{
                     cursor: 'pointer', display: 'flex', alignItems: 'center',
                     justifyContent: 'space-between', gap: 16,
-                    fontFamily: dispFF, fontSize: 22, color: SITE.ink, lineHeight: 1.25,
+                    fontFamily: dispFF, fontSize: m ? 18 : 22, color: SITE.ink, lineHeight: 1.25,
                     userSelect: 'none',
                   }}>
                   <span>{it.q}</span>

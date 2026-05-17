@@ -1,8 +1,9 @@
-/* global React, SITE, sansFF, dispFF, SIcon, PillBadge, CTA, AnnouncementBar, SiteNav, SiteFooter */
+/* global React, SITE, sansFF, dispFF, SIcon, PillBadge, CTA, AnnouncementBar, SiteNav, SiteFooter, useIsMobile */
 // WASH WordPress site — Coming Soon page (launch announcement)
 
 // ── Live countdown to 1 Sep 2026 ─────────────────────────────
 function CountdownGrid() {
+  const m = useIsMobile();
   const LAUNCH = new Date('2026-09-01T00:00:00').getTime();
 
   const calc = () => {
@@ -30,13 +31,13 @@ function CountdownGrid() {
   ];
 
   return (
-    <div style={{ display: 'flex', gap: 12 }}>
+    <div style={{ display: 'flex', gap: m ? 8 : 12, flexWrap: 'wrap' }}>
       {blocks.map((b, i) => (
         <div key={i} style={{
           background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.16)',
-          borderRadius: 18, padding: '18px 20px', minWidth: 92, textAlign: 'center',
+          borderRadius: 18, padding: m ? '12px 14px' : '18px 20px', minWidth: m ? 68 : 92, textAlign: 'center',
         }}>
-          <div style={{ fontFamily: dispFF, fontSize: 46, lineHeight: 1, color: '#fff' }}>{b.v}</div>
+          <div style={{ fontFamily: dispFF, fontSize: m ? 36 : 46, lineHeight: 1, color: '#fff' }}>{b.v}</div>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.55)', letterSpacing: 0.6, textTransform: 'uppercase', marginTop: 8 }}>{b.l}</div>
         </div>
       ))}
@@ -153,20 +154,24 @@ function SignupCard() {
 }
 
 function CSHero() {
+  const m = useIsMobile();
   return (
     <section style={{
-      background: SITE.primaryInk, color: '#fff', padding: '88px 32px 64px',
+      background: SITE.primaryInk, color: '#fff',
+      padding: m ? '56px 20px 40px' : '88px 32px 64px',
       position: 'relative', overflow: 'hidden',
     }}>
-      <svg width="800" height="800" style={{ position: 'absolute', right: -240, top: -140, opacity: 0.12 }}>
-        <circle cx="400" cy="400" r="380" fill="none" stroke="#fff" strokeDasharray="2 6" />
-        <circle cx="400" cy="400" r="290" fill="none" stroke="#fff" strokeDasharray="2 6" />
-        <circle cx="400" cy="400" r="200" fill="none" stroke="#fff" strokeDasharray="2 6" />
-        <circle cx="400" cy="400" r="120" fill="none" stroke="#fff" strokeDasharray="2 6" />
-      </svg>
+      {!m && (
+        <svg width="800" height="800" style={{ position: 'absolute', right: -240, top: -140, opacity: 0.12 }}>
+          <circle cx="400" cy="400" r="380" fill="none" stroke="#fff" strokeDasharray="2 6" />
+          <circle cx="400" cy="400" r="290" fill="none" stroke="#fff" strokeDasharray="2 6" />
+          <circle cx="400" cy="400" r="200" fill="none" stroke="#fff" strokeDasharray="2 6" />
+          <circle cx="400" cy="400" r="120" fill="none" stroke="#fff" strokeDasharray="2 6" />
+        </svg>
+      )}
 
       <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid',
-        gridTemplateColumns: '1.2fr 1fr', gap: 56, alignItems: 'center', position: 'relative' }}>
+        gridTemplateColumns: m ? '1fr' : '1.2fr 1fr', gap: m ? 36 : 56, alignItems: 'center', position: 'relative' }}>
         <div>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -177,13 +182,13 @@ function CSHero() {
             Launching Semester 2 · September 2026
           </span>
           <h1 style={{
-            fontFamily: dispFF, fontWeight: 400, fontSize: 86, lineHeight: 1, letterSpacing: '-0.025em',
+            fontFamily: dispFF, fontWeight: 400, fontSize: m ? 48 : 86, lineHeight: 1, letterSpacing: '-0.025em',
             color: '#fff', margin: '20px 0 22px',
           }}>
             The new way to get academic help is <span style={{ fontStyle: 'italic', color: SITE.accent }}>almost here.</span>
           </h1>
           <p style={{
-            fontFamily: sansFF, fontSize: 17.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.75)',
+            fontFamily: sansFF, fontSize: m ? 15 : 17.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.75)',
             margin: '0 0 32px', maxWidth: 560,
           }}>
             We're rebuilding WASH from the booking flow up. One central platform.
@@ -199,19 +204,20 @@ function CSHero() {
 }
 
 function FeatureShowcase() {
+  const m = useIsMobile();
   return (
-    <section style={{ background: SITE.bg, padding: '88px 32px' }}>
+    <section style={{ background: SITE.bg, padding: m ? '56px 20px' : '88px 32px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40 }}>
           <div>
             <PillBadge tone="primary">What's launching</PillBadge>
-            <h2 style={{ fontFamily: dispFF, fontWeight: 400, fontSize: 48, letterSpacing: '-0.02em', margin: '14px 0 0', maxWidth: 700, lineHeight: 1.05 }}>
+            <h2 style={{ fontFamily: dispFF, fontWeight: 400, fontSize: m ? 32 : 48, letterSpacing: '-0.02em', margin: '14px 0 0', maxWidth: 700, lineHeight: 1.05 }}>
               Six features that fix the things students hate about WASH today.
             </h2>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: m ? '1fr' : 'repeat(3, 1fr)', gap: 18 }}>
           {[
             { n: '01', t: 'Find a tutor by subject',      b: 'Filter 50+ peer tutors by course code, day, in-person or virtual. See their rating, last session date, and live availability.', v: 'find' },
             { n: '02', t: 'Book in under 2 minutes',      b: 'Pick a slot, confirm. No email back-and-forth. Calendar invite, Zoom link and a confirmation come back in one tap.',            v: 'book' },
@@ -324,6 +330,7 @@ function FeatureVisual({ variant }) {
 }
 
 function Roadmap() {
+  const m = useIsMobile();
   const milestones = [
     { d: 'May 2026', s: 'done',    t: 'User research with 240 students',     b: 'Survey + interviews completed. Findings shared with the SRC.' },
     { d: 'Jun 2026', s: 'done',    t: 'Pilot booking flow tested',           b: 'Closed pilot with 50 students booking Writing & Stats sessions.' },
@@ -332,10 +339,10 @@ function Roadmap() {
     { d: 'Sep 2026', s: 'next',    t: 'Public launch · all three services',  b: 'Bookings open to every registered student.' },
   ];
   return (
-    <section style={{ background: SITE.paper, padding: '88px 32px', borderTop: `1px solid ${SITE.line}`, borderBottom: `1px solid ${SITE.line}` }}>
+    <section style={{ background: SITE.paper, padding: m ? '56px 20px' : '88px 32px', borderTop: `1px solid ${SITE.line}`, borderBottom: `1px solid ${SITE.line}` }}>
       <div style={{ maxWidth: 980, margin: '0 auto' }}>
         <PillBadge tone="primary">The road to launch</PillBadge>
-        <h2 style={{ fontFamily: dispFF, fontWeight: 400, fontSize: 44, lineHeight: 1.08, letterSpacing: '-0.02em', margin: '14px 0 40px', maxWidth: 700 }}>
+        <h2 style={{ fontFamily: dispFF, fontWeight: 400, fontSize: m ? 30 : 44, lineHeight: 1.08, letterSpacing: '-0.02em', margin: '14px 0 40px', maxWidth: 700 }}>
           We're not waiting until September to figure it out.
         </h2>
         <div style={{ position: 'relative' }}>
@@ -343,27 +350,27 @@ function Roadmap() {
             position: 'absolute', left: 11, top: 8, bottom: 8, width: 2,
             background: `linear-gradient(to bottom, ${SITE.primary} 0%, ${SITE.primary} 40%, ${SITE.lineStrong} 40%, ${SITE.lineStrong} 100%)`,
           }} />
-          {milestones.map((m, i) => (
-            <div key={i} style={{ display: 'grid', gridTemplateColumns: '24px 140px 1fr', gap: 20, padding: '14px 0', alignItems: 'flex-start', position: 'relative' }}>
+          {milestones.map((mi, i) => (
+            <div key={i} style={{ display: 'grid', gridTemplateColumns: m ? '24px 100px 1fr' : '24px 140px 1fr', gap: m ? 12 : 20, padding: '14px 0', alignItems: 'flex-start', position: 'relative' }}>
               <div style={{
                 width: 24, height: 24, borderRadius: '50%',
-                background: m.s === 'done' ? SITE.primary : m.s === 'current' ? SITE.accent : '#fff',
-                border: `2px solid ${m.s === 'next' ? SITE.lineStrong : 'transparent'}`,
+                background: mi.s === 'done' ? SITE.primary : mi.s === 'current' ? SITE.accent : '#fff',
+                border: `2px solid ${mi.s === 'next' ? SITE.lineStrong : 'transparent'}`,
                 display: 'grid', placeItems: 'center', color: '#fff', zIndex: 2,
-                boxShadow: m.s === 'current' ? `0 0 0 6px rgba(216,89,58,0.15)` : 'none',
+                boxShadow: mi.s === 'current' ? `0 0 0 6px rgba(216,89,58,0.15)` : 'none',
               }}>
-                {m.s === 'done'    && <SIcon name="check" size={12} stroke={2.4} />}
-                {m.s === 'current' && <span style={{ width: 6, height: 6, background: '#fff', borderRadius: '50%' }} />}
+                {mi.s === 'done'    && <SIcon name="check" size={12} stroke={2.4} />}
+                {mi.s === 'current' && <span style={{ width: 6, height: 6, background: '#fff', borderRadius: '50%' }} />}
               </div>
-              <div style={{ fontFamily: sansFF, fontSize: 12, fontWeight: 500, color: SITE.muted, letterSpacing: 0.4, textTransform: 'uppercase', paddingTop: 4 }}>{m.d}</div>
+              <div style={{ fontFamily: sansFF, fontSize: 12, fontWeight: 500, color: SITE.muted, letterSpacing: 0.4, textTransform: 'uppercase', paddingTop: 4 }}>{mi.d}</div>
               <div>
-                <div style={{ fontFamily: dispFF, fontSize: 22, lineHeight: 1.2, color: SITE.ink, display: 'flex', alignItems: 'center', gap: 10 }}>
-                  {m.t}
-                  {m.s === 'current' && (
+                <div style={{ fontFamily: dispFF, fontSize: m ? 18 : 22, lineHeight: 1.2, color: SITE.ink, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                  {mi.t}
+                  {mi.s === 'current' && (
                     <span style={{ fontFamily: sansFF, fontSize: 10.5, fontWeight: 600, background: SITE.accent, color: '#fff', padding: '2px 8px', borderRadius: 4, letterSpacing: 0.4, textTransform: 'uppercase' }}>In progress</span>
                   )}
                 </div>
-                <div style={{ fontSize: 14, color: SITE.muted, marginTop: 4, lineHeight: 1.55 }}>{m.b}</div>
+                <div style={{ fontSize: 14, color: SITE.muted, marginTop: 4, lineHeight: 1.55 }}>{mi.b}</div>
               </div>
             </div>
           ))}
@@ -374,22 +381,26 @@ function Roadmap() {
 }
 
 function MeantimeStrip({ onNavigate }) {
+  const m = useIsMobile();
   return (
-    <section style={{ background: SITE.bg, padding: '60px 32px' }}>
+    <section style={{ background: SITE.bg, padding: m ? '40px 20px' : '60px 32px' }}>
       <div style={{
         maxWidth: 1100, margin: '0 auto',
         background: '#fff', borderRadius: 22, border: `1px solid ${SITE.line}`,
-        padding: '28px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 28,
+        padding: m ? '24px 20px' : '28px 32px',
+        display: 'flex', alignItems: m ? 'flex-start' : 'center',
+        justifyContent: 'space-between', gap: 24,
+        flexDirection: m ? 'column' : 'row',
       }}>
         <div>
-          <div style={{ fontFamily: dispFF, fontSize: 26, lineHeight: 1.2 }}>
+          <div style={{ fontFamily: dispFF, fontSize: m ? 22 : 26, lineHeight: 1.2 }}>
             Need help <span style={{ fontStyle: 'italic', color: SITE.primary }}>right now?</span>
           </div>
           <div style={{ fontSize: 14, color: SITE.muted, marginTop: 6 }}>
             The current system still works — slower, but it works. Or pop in to Solomon Mahlangu House.
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div style={{ display: 'flex', gap: 10, flexDirection: m ? 'column' : 'row', width: m ? '100%' : 'auto' }}>
           <CTA variant="ghost" icon={null} onClick={() => onNavigate('contact')}>Contact a coordinator</CTA>
           <CTA variant="dark" onClick={() => onNavigate('contact')}>Get directions</CTA>
         </div>
